@@ -313,7 +313,7 @@ include_once('simple_html_dom.php');
 
     foreach ($races as $key => $race){
 
-        if(trim($race) == 'Berger des Pyrenees a poil long'){
+        if(trim($race) == 'Bosnische Bracke'){
             $needle = true;
         }
 
