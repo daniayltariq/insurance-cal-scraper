@@ -309,136 +309,144 @@ include_once('simple_html_dom.php');
     $url = 'https://secure2.hansemerkur.de/service-bipro-dispatcher/tarifierung/quote';
 
     sort($races);
+    $needle = false;
 
     foreach ($races as $key => $race){
+
+        if(trim($race) == 'Australien Heeler'){
+            $needle = true;
+        }
+
+        if($needle){
         
-        for ($i = 0; $i < 9; $i++){
-        // for ($i = 0; $i < 3; $i++){
+            for ($i = 0; $i < 9; $i++){
+            // for ($i = 0; $i < 3; $i++){
+                    
+
+                $year = date("Y");
+
+                $dob = $year - $i . '-07-01';
+                $tomorrow = date("Y-m-d", strtotime("+1 day"));
+
+                // Temp
+                // $race = 'Mischling ab 45cm Schulterhöhe';
+
+                $a = getPackageData($url, 'tier-0', $race, $dob, $tomorrow, 'package-details');
+                $a_with_zahn_premium     = getPackageData($url, 'final-zahn', $race, $dob, $tomorrow, 'final-details', 'tier-0-final', 'Premium-zahn');
+                $a_without_zahn_premium  = getPackageData($url, 'final', $race, $dob, $tomorrow, 'final-details', 'tier-0-final', 'Premium');
+                $a_with_zahn_premplus    = getPackageData($url, 'final-zahn', $race, $dob, $tomorrow, 'final-details', 'tier-0-final', 'PremiumPlus-zahn');
+                $a_without_zahn_premplus = getPackageData($url, 'final', $race, $dob, $tomorrow, 'final-details', 'tier-0-final', 'PremiumPlus');
+
+
+
+                $b = getPackageData($url, 'tier-250', $race, $dob, $tomorrow, 'package-details');
+                $b_with_zahn_premium      = getPackageData($url, 'final-zahn', $race, $dob, $tomorrow, 'final-details', 'tier-250-final', 'Premium-zahn');
+                $b_without_zahn_premium   = getPackageData($url, 'final', $race, $dob, $tomorrow, 'final-details', 'tier-250-final', 'Premium');
+                $b_with_zahn_premplus     = getPackageData($url, 'final-zahn', $race, $dob, $tomorrow, 'final-details', 'tier-250-final', 'PremiumPlus-zahn');
+                $b_without_zahn_premplus  = getPackageData($url, 'final', $race, $dob, $tomorrow, 'final-details', 'tier-250-final', 'PremiumPlus');
+
+                // print_r($a);
+                // print_r($d_with_zahn);
+                // print_r($d_without_zahn);
                 
-
-            $year = date("Y");
-
-            $dob = $year - $i . '-07-01';
-            $tomorrow = date("Y-m-d", strtotime("+1 day"));
-
-            // Temp
-            // $race = 'Mischling ab 45cm Schulterhöhe';
-
-            $a = getPackageData($url, 'tier-0', $race, $dob, $tomorrow, 'package-details');
-            $a_with_zahn_premium     = getPackageData($url, 'final-zahn', $race, $dob, $tomorrow, 'final-details', 'tier-0-final', 'Premium-zahn');
-            $a_without_zahn_premium  = getPackageData($url, 'final', $race, $dob, $tomorrow, 'final-details', 'tier-0-final', 'Premium');
-            $a_with_zahn_premplus    = getPackageData($url, 'final-zahn', $race, $dob, $tomorrow, 'final-details', 'tier-0-final', 'PremiumPlus-zahn');
-            $a_without_zahn_premplus = getPackageData($url, 'final', $race, $dob, $tomorrow, 'final-details', 'tier-0-final', 'PremiumPlus');
+                // die();
 
 
 
-            $b = getPackageData($url, 'tier-250', $race, $dob, $tomorrow, 'package-details');
-            $b_with_zahn_premium      = getPackageData($url, 'final-zahn', $race, $dob, $tomorrow, 'final-details', 'tier-250-final', 'Premium-zahn');
-            $b_without_zahn_premium   = getPackageData($url, 'final', $race, $dob, $tomorrow, 'final-details', 'tier-250-final', 'Premium');
-            $b_with_zahn_premplus     = getPackageData($url, 'final-zahn', $race, $dob, $tomorrow, 'final-details', 'tier-250-final', 'PremiumPlus-zahn');
-            $b_without_zahn_premplus  = getPackageData($url, 'final', $race, $dob, $tomorrow, 'final-details', 'tier-250-final', 'PremiumPlus');
+                $filename = 'uploads/file7.xlsx'; 
+                $spreadsheet = IOFactory::load($filename);
 
-            // print_r($a);
-            // print_r($d_with_zahn);
-            // print_r($d_without_zahn);
-            
-            // die();
+                $sheet = $spreadsheet->getActiveSheet();
 
-
-
-            $filename = 'uploads/file7.xlsx'; 
-            $spreadsheet = IOFactory::load($filename);
-
-            $sheet = $spreadsheet->getActiveSheet();
-
-            $newData = array(
-                array(
-                    'A' => $race,
-                    'B' => (string)$i,
-                    'C' => $b['Smart'],
-                    'D' => $b['Easy'],
-                    'E' => $b['Easy_zahn'],
-                    'F' => $b['Best'],
-                    'G' => $b['Best_zahn'],
-                    'H' => $a['Easy'],
-                    'I' => $a['Easy_zahn'],
-                    'J' => $a['Best'],
-                    'K' => $a['Best_zahn'],
-                    'L' => $b['Premium'],
-                    'M' => $b_without_zahn_premium[2]['date'] ?? '',
-                    'N' => $b_without_zahn_premium[2]['val'] ?? '',
-                    'O' => $b_without_zahn_premium[1]['date'] ?? '',
-                    'P' => $b_without_zahn_premium[1]['val'] ?? '',
-                    'Q' => $b_without_zahn_premium[0]['date'] ?? '',
-                    'R' => $b_without_zahn_premium[0]['val'] ?? '',
-                    'S' => $b['Premium_zahn'],
-                    'T' => $b_with_zahn_premium[2]['date'] ?? '',
-                    'U' => $b_with_zahn_premium[2]['val'] ?? '',
-                    'V' => $b_with_zahn_premium[1]['date'] ?? '',
-                    'W' => $b_with_zahn_premium[1]['val'] ?? '',
-                    'X' => $b_with_zahn_premium[0]['date'] ?? '',
-                    'Y' => $b_with_zahn_premium[0]['val'] ?? '',
-                    'Z' => $b['PremiumPlus'],
-                    'AA' => $b_without_zahn_premplus[2]['date'] ?? '',
-                    'AB' => $b_without_zahn_premplus[2]['val'] ?? '',
-                    'AC' => $b_without_zahn_premplus[1]['date'] ?? '',
-                    'AD' => $b_without_zahn_premplus[1]['val'] ?? '',
-                    'AE' => $b_without_zahn_premplus[0]['date'] ?? '',
-                    'AF' => $b_without_zahn_premplus[0]['val'] ?? '',
-                    'AG' => $b['PremiumPlus_zahn'],
-                    'AH' => $b_with_zahn_premplus[2]['date'] ?? '',
-                    'AI' => $b_with_zahn_premplus[2]['val'] ?? '',
-                    'AJ' => $b_with_zahn_premplus[1]['date'] ?? '',
-                    'AK' => $b_with_zahn_premplus[1]['val'] ?? '',
-                    'AL' => $b_with_zahn_premplus[0]['date'] ?? '',
-                    'AM' => $b_with_zahn_premplus[0]['val'] ?? '',
-                    'AN' => $a['Premium'],
-                    'AO' => $a_without_zahn_premium[2]['date'] ?? '',
-                    'AP' => $a_without_zahn_premium[2]['val'] ?? '',
-                    'AQ' => $a_without_zahn_premium[1]['date'] ?? '',
-                    'AR' => $a_without_zahn_premium[1]['val'] ?? '',
-                    'AS' => $a_without_zahn_premium[0]['date'] ?? '',
-                    'AT' => $a_without_zahn_premium[0]['val'] ?? '',
-                    'AU' => $a['Premium_zahn'],
-                    'AV' => $a_with_zahn_premium[2]['date'] ?? '',
-                    'AW' => $a_with_zahn_premium[2]['val'] ?? '',
-                    'AX' => $a_with_zahn_premium[1]['date'] ?? '',
-                    'AY' => $a_with_zahn_premium[1]['val'] ?? '',
-                    'AZ' => $a_with_zahn_premium[0]['date'] ?? '',
-                    'BA' => $a_with_zahn_premium[0]['val'] ?? '',
-                    'BB' => $a['PremiumPlus'],
-                    'BC' => $a_without_zahn_premplus[2]['date'] ?? '',
-                    'BD' => $a_without_zahn_premplus[2]['val'] ?? '',
-                    'BE' => $a_without_zahn_premplus[1]['date'] ?? '',
-                    'BF' => $a_without_zahn_premplus[1]['val'] ?? '',
-                    'BG' => $a_without_zahn_premplus[0]['date'] ?? '',
-                    'BH' => $a_without_zahn_premplus[0]['val'] ?? '',
-                    'BI' => $a['PremiumPlus_zahn'],
-                    'BJ' => $a_with_zahn_premplus[2]['date'] ?? '',
-                    'BK' => $a_with_zahn_premplus[2]['val'] ?? '',
-                    'BL' => $a_with_zahn_premplus[1]['date'] ?? '',
-                    'BM' => $a_with_zahn_premplus[1]['val'] ?? '',
-                    'BN' => $a_with_zahn_premplus[0]['date'] ?? '',
-                    'BO' => $a_with_zahn_premplus[0]['val'] ?? '',
-                    
-                    
-                )
-            );
+                $newData = array(
+                    array(
+                        'A' => $race,
+                        'B' => (string)$i,
+                        'C' => $b['Smart'],
+                        'D' => $b['Easy'],
+                        'E' => $b['Easy_zahn'],
+                        'F' => $b['Best'],
+                        'G' => $b['Best_zahn'],
+                        'H' => $a['Easy'],
+                        'I' => $a['Easy_zahn'],
+                        'J' => $a['Best'],
+                        'K' => $a['Best_zahn'],
+                        'L' => $b['Premium'],
+                        'M' => $b_without_zahn_premium[2]['date'] ?? '',
+                        'N' => $b_without_zahn_premium[2]['val'] ?? '',
+                        'O' => $b_without_zahn_premium[1]['date'] ?? '',
+                        'P' => $b_without_zahn_premium[1]['val'] ?? '',
+                        'Q' => $b_without_zahn_premium[0]['date'] ?? '',
+                        'R' => $b_without_zahn_premium[0]['val'] ?? '',
+                        'S' => $b['Premium_zahn'],
+                        'T' => $b_with_zahn_premium[2]['date'] ?? '',
+                        'U' => $b_with_zahn_premium[2]['val'] ?? '',
+                        'V' => $b_with_zahn_premium[1]['date'] ?? '',
+                        'W' => $b_with_zahn_premium[1]['val'] ?? '',
+                        'X' => $b_with_zahn_premium[0]['date'] ?? '',
+                        'Y' => $b_with_zahn_premium[0]['val'] ?? '',
+                        'Z' => $b['PremiumPlus'],
+                        'AA' => $b_without_zahn_premplus[2]['date'] ?? '',
+                        'AB' => $b_without_zahn_premplus[2]['val'] ?? '',
+                        'AC' => $b_without_zahn_premplus[1]['date'] ?? '',
+                        'AD' => $b_without_zahn_premplus[1]['val'] ?? '',
+                        'AE' => $b_without_zahn_premplus[0]['date'] ?? '',
+                        'AF' => $b_without_zahn_premplus[0]['val'] ?? '',
+                        'AG' => $b['PremiumPlus_zahn'],
+                        'AH' => $b_with_zahn_premplus[2]['date'] ?? '',
+                        'AI' => $b_with_zahn_premplus[2]['val'] ?? '',
+                        'AJ' => $b_with_zahn_premplus[1]['date'] ?? '',
+                        'AK' => $b_with_zahn_premplus[1]['val'] ?? '',
+                        'AL' => $b_with_zahn_premplus[0]['date'] ?? '',
+                        'AM' => $b_with_zahn_premplus[0]['val'] ?? '',
+                        'AN' => $a['Premium'],
+                        'AO' => $a_without_zahn_premium[2]['date'] ?? '',
+                        'AP' => $a_without_zahn_premium[2]['val'] ?? '',
+                        'AQ' => $a_without_zahn_premium[1]['date'] ?? '',
+                        'AR' => $a_without_zahn_premium[1]['val'] ?? '',
+                        'AS' => $a_without_zahn_premium[0]['date'] ?? '',
+                        'AT' => $a_without_zahn_premium[0]['val'] ?? '',
+                        'AU' => $a['Premium_zahn'],
+                        'AV' => $a_with_zahn_premium[2]['date'] ?? '',
+                        'AW' => $a_with_zahn_premium[2]['val'] ?? '',
+                        'AX' => $a_with_zahn_premium[1]['date'] ?? '',
+                        'AY' => $a_with_zahn_premium[1]['val'] ?? '',
+                        'AZ' => $a_with_zahn_premium[0]['date'] ?? '',
+                        'BA' => $a_with_zahn_premium[0]['val'] ?? '',
+                        'BB' => $a['PremiumPlus'],
+                        'BC' => $a_without_zahn_premplus[2]['date'] ?? '',
+                        'BD' => $a_without_zahn_premplus[2]['val'] ?? '',
+                        'BE' => $a_without_zahn_premplus[1]['date'] ?? '',
+                        'BF' => $a_without_zahn_premplus[1]['val'] ?? '',
+                        'BG' => $a_without_zahn_premplus[0]['date'] ?? '',
+                        'BH' => $a_without_zahn_premplus[0]['val'] ?? '',
+                        'BI' => $a['PremiumPlus_zahn'],
+                        'BJ' => $a_with_zahn_premplus[2]['date'] ?? '',
+                        'BK' => $a_with_zahn_premplus[2]['val'] ?? '',
+                        'BL' => $a_with_zahn_premplus[1]['date'] ?? '',
+                        'BM' => $a_with_zahn_premplus[1]['val'] ?? '',
+                        'BN' => $a_with_zahn_premplus[0]['date'] ?? '',
+                        'BO' => $a_with_zahn_premplus[0]['val'] ?? '',
+                        
+                        
+                    )
+                );
 
 
-            $highestRow = $sheet->getHighestRow();
-            $nextRow = $highestRow + 1;
+                $highestRow = $sheet->getHighestRow();
+                $nextRow = $highestRow + 1;
 
-            foreach ($newData as $dataRow) {
-                $sheet->fromArray($dataRow, null, 'A' . $nextRow);
-                $nextRow++;
+                foreach ($newData as $dataRow) {
+                    $sheet->fromArray($dataRow, null, 'A' . $nextRow);
+                    $nextRow++;
+                }
+
+                $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+                $writer->save($filename);
+                
+                // die();
+
             }
-
-            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-            $writer->save($filename);
-            
-            // die();
-
         }
         
         // die();
