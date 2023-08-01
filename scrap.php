@@ -313,7 +313,7 @@ include_once('simple_html_dom.php');
 
     foreach ($races as $key => $race){
 
-        if(trim($race) == 'Beagle Harrier'){
+        if(trim($race) == 'Berger des Pyrenees a poil long'){
             $needle = true;
         }
 
@@ -443,6 +443,10 @@ include_once('simple_html_dom.php');
 
                 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
                 $writer->save($filename);
+
+
+                $spreadsheet->disconnectWorksheets();
+                unset($spreadsheet);
                 
                 // die();
 
