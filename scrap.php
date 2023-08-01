@@ -136,9 +136,9 @@ include_once('simple_html_dom.php');
                 $zahn_value = '';
                 $tier_2 = false;
                 
-                echo "\n" . "\n";
-                echo '---'.$dob.'---';
-                echo "\n";
+                // echo "\n" . "\n";
+                // echo '---'.$dob.'---';
+                // echo "\n";
 
 
                 foreach ($responseData['tarifierung']['verkaufsprodukt'][0]['produkt'] as $key => $value) {
