@@ -1,0 +1,278 @@
+{
+	"erweiterung":[
+		{
+			"@type":"de.hansemerkur.namespace.allgemein.CTInterneKontextdatenErweiterung",
+			"barcode":{
+				"@type":"de.hansemerkur.namespace.allgemein.CTBarcode"
+			},
+			"mandant":"HMA"
+		},
+		{
+			"@type":"de.hansemerkur.namespace.allgemein.CTOlaKontextdatenErweiterung",
+			"partnerId":"1",
+			"produktkategorieId":"490"
+		}
+	],
+	"@type":"net.bipro.namespace.versicherung.tarifierung.CTQuoteRequest",
+	"biPROVersion":"2.8.4.1.0",
+	"consumerID":"OLA;TKV",
+	"tarifierung":{
+		"erweiterung":[
+			{
+				"@type":"de.hansemerkur.namespace.allgemein.CTInterneKontextdatenErweiterung",
+				"barcode":{
+					"@type":"de.hansemerkur.namespace.allgemein.CTBarcode"
+				},
+				"mandant":"HMA"
+			},
+			{
+				"@type":"de.hansemerkur.namespace.allgemein.CTOlaKontextdatenErweiterung",
+				"partnerId":"1",
+				"produktkategorieId":"490"
+			}
+		],
+		"@type":"net.bipro.namespace.versicherung.tarifierung.CTTarifierung",
+		"artID":"100001010",
+		"dokumentanforderung":[
+			
+		],
+		"vermittler":[
+			{
+				"erweiterung":[
+					
+				],
+				"@type":"net.bipro.namespace.allgemein.CTVermittler",
+				"vermittlernummer":"1509983",
+				"vermittlernummerVM":null,
+				"vermittlerrolle":[
+					{
+						"erweiterung":[
+							
+						],
+						"@type":"net.bipro.namespace.allgemein.CTVermittlerrolle",
+						"artID":"01",
+						"vermittlertyp":"01"
+					},
+					{
+						"erweiterung":[
+							
+						],
+						"@type":"net.bipro.namespace.allgemein.CTVermittlerrolle",
+						"artID":"01",
+						"vermittlertyp":"02"
+					}
+				],
+				"vertriebskanal":null,
+				"partnerID":"Vermittler"
+			}
+		],
+		"zahlungsart":"1",
+		"partner":[
+			{
+				"erweiterung":[
+					
+				],
+				"@type":"net.bipro.namespace.partner.CTPerson",
+				"partnerID":"1",
+				"name":null,
+				"anrede":null,
+				"anschrift":[
+					
+				],
+				"zusaetzlichePartnerdaten":[
+					
+				],
+				"bankverbindung":[
+					
+				],
+				"kommunikationsverbindung":[
+					
+				],
+				"partnerbeziehung":[
+					
+				],
+				"direktmarketing":[
+					
+				],
+				"geburtsdatum":"2004-07-01",
+				"vorname":null,
+				"fuehrerschein":[
+					
+				]
+			}
+		],
+		"versicherungsnehmer":{
+			"erweiterung":[
+				
+			],
+			"@type":"net.bipro.namespace.partner.CTVertragspartner",
+			"partnerID":"1"
+		},
+		"verkaufsprodukt":[
+			{
+				"@type":"net.bipro.namespace.produktmodell.CTVerkaufsprodukt",
+				"gewuenschteZahlungsweise":[
+					"8"
+				],
+				"versicherungsdauer":{
+					"erweiterung":[
+						
+					],
+					"@type":"net.bipro.namespace.allgemein.CTZeitraum",
+					"beginn":"2023-08-01",
+					"ende":"2024-08-01",
+					"anzahlJahre":1
+				},
+				"beitrag":[
+					
+				],
+				"kennung":"tkv",
+				"kondition":[
+					
+				],
+				"produkt":[
+					{
+						"@type":"net.bipro.namespace.versicherung.produktmodell.komposit.CTSUHVersicherung",
+						"bezeichnung":"Tier-Krankenversicherung",
+						"versicherungsdauer":{
+							"erweiterung":[
+								
+							],
+							"@type":"net.bipro.namespace.allgemein.CTZeitraum",
+							"beginn":"2023-08-01",
+							"ende":"2024-08-01",
+							"anzahlJahre":1
+						},
+						"beitrag":[
+							
+						],
+						"kennung":"tkv",
+						"kondition":[
+							
+						],
+						"sparte":"684",
+						"elementarprodukt":[
+							{
+								"@type":"net.bipro.namespace.versicherung.produktmodell.komposit.CTDeckung",
+								"beitrag":[
+									
+								],
+								"selbstbeteiligung":[
+									{
+										"erweiterung":[
+											
+										],
+										"@type":"net.bipro.namespace.versicherung.produktmodell.CTSelbstbeteiligung",
+										"artID":{
+											"@type":"net.bipro.namespace.datentypen.STESelbstbeteiligungBasis",
+											"value":"01"
+										},
+										"wert":0,
+										"waehrung":"EUR",
+										"werteinheit":"20"
+									}
+								],
+								"artID":{
+									"@type":"net.bipro.namespace.datentypen.STEDeckungBasis",
+									"value":"6840"
+								},
+								"versichertesObjekt":[
+									{
+										"erweiterung":[
+											
+										],
+										"@type":"net.bipro.namespace.versicherung.produktmodell.komposit.CTVersichertesObjekt",
+										"gegenstandID":"1"
+									}
+								]
+							},
+							{
+								"@type":"net.bipro.namespace.versicherung.produktmodell.komposit.CTDeckung",
+								"beitrag":[
+									
+								],
+								"selbstbeteiligung":[
+									
+								],
+								"artID":{
+									"@type":"net.bipro.namespace.datentypen.STEDeckungBasis",
+									"value":"6841"
+								},
+								"versichertesObjekt":[
+									{
+										"erweiterung":[
+											
+										],
+										"@type":"net.bipro.namespace.versicherung.produktmodell.komposit.CTVersichertesObjekt",
+										"gegenstandID":"1"
+									}
+								]
+							},
+							{
+								"@type":"net.bipro.namespace.versicherung.produktmodell.komposit.CTDeckung",
+								"beitrag":[
+									
+								],
+								"selbstbeteiligung":[
+									
+								],
+								"artID":{
+									"@type":"net.bipro.namespace.datentypen.STEDeckungBasis",
+									"value":"6842"
+								},
+								"versichertesObjekt":[
+									{
+										"erweiterung":[
+											
+										],
+										"@type":"net.bipro.namespace.versicherung.produktmodell.komposit.CTVersichertesObjekt",
+										"gegenstandID":"1"
+									}
+								]
+							}
+						],
+						"paket":[
+							{
+								"@type":"de.hansemerkur.namespace.allgemein.STEPaketErweitert",
+								"value":"PremiumPlus"
+							}
+						]
+					}
+				]
+			}
+		],
+		"gegenstand":[
+			{
+				"erweiterung":[
+					
+				],
+				"@type":"net.bipro.namespace.sachen.CTTier",
+				"gegenstandID":"1",
+				"rasse":[
+					"Mischling ab 45cm Schulterhöhe"
+				],
+				"zusaetzlicheGegenstandsdaten":[
+					{
+						"erweiterung":[
+							
+						],
+						"@type":"de.hansemerkur.namespace.komposit.CTZusaetzlicheGegenstandsdatenTier",
+						"registrierungstyp":"Taetowierungsnummer",
+						"halter":"5"
+					}
+				],
+				"artID":"001",
+				"name":"dani",
+				"geburtsdatum":"2023-07-01",
+				"geschlecht":1,
+				"registriernummer":"546162"
+			}
+		],
+		"aktivitaet":[
+			
+		],
+		"vorNebenVersicherung":[
+			
+		]
+	}
+}

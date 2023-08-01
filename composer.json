@@ -1,0 +1,7 @@
+{
+    "require": {
+        "rct567/dom-query": "^0.8.0",
+        "chrome-php/chrome": "^1.1",
+        "phpoffice/phpspreadsheet": "^1.29"
+    }
+}
