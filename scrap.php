@@ -79,13 +79,11 @@ include_once('simple_html_dom.php');
         curl_setopt_array( $ch, $options );
         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
 
-        return $response = curl_exec($ch);
-
-        if (curl_errno($ch)) {
-            echo 'cURL error: ' . curl_error($ch);
-        }
-
+        $response = curl_exec($ch);
         curl_close($ch);
+
+        return $response;
+
     }
 
 
@@ -311,9 +309,11 @@ include_once('simple_html_dom.php');
     sort($races);
     $needle = false;
 
+    // print_r($races);die();
+
     foreach ($races as $key => $race){
 
-        if(trim($race) == 'Australien Heeler'){
+        if(trim($race) == 'Beagle Harrier'){
             $needle = true;
         }
 
@@ -362,65 +362,65 @@ include_once('simple_html_dom.php');
                     array(
                         'A' => $race,
                         'B' => (string)$i,
-                        'C' => $b['Smart'],
-                        'D' => $b['Easy'],
-                        'E' => $b['Easy_zahn'],
-                        'F' => $b['Best'],
-                        'G' => $b['Best_zahn'],
-                        'H' => $a['Easy'],
-                        'I' => $a['Easy_zahn'],
-                        'J' => $a['Best'],
-                        'K' => $a['Best_zahn'],
-                        'L' => $b['Premium'],
+                        'C' => $b['Smart'] ?? '',
+                        'D' => $b['Easy'] ?? '',
+                        'E' => $b['Easy_zahn'] ?? '',
+                        'F' => $b['Best'] ?? '',
+                        'G' => $b['Best_zahn'] ?? '',
+                        'H' => $a['Easy'] ?? '',
+                        'I' => $a['Easy_zahn'] ?? '',
+                        'J' => $a['Best'] ?? '',
+                        'K' => $a['Best_zahn'] ?? '',
+                        'L' => $b['Premium'] ?? '',
                         'M' => $b_without_zahn_premium[2]['date'] ?? '',
                         'N' => $b_without_zahn_premium[2]['val'] ?? '',
                         'O' => $b_without_zahn_premium[1]['date'] ?? '',
                         'P' => $b_without_zahn_premium[1]['val'] ?? '',
                         'Q' => $b_without_zahn_premium[0]['date'] ?? '',
                         'R' => $b_without_zahn_premium[0]['val'] ?? '',
-                        'S' => $b['Premium_zahn'],
+                        'S' => $b['Premium_zahn'] ?? '',
                         'T' => $b_with_zahn_premium[2]['date'] ?? '',
                         'U' => $b_with_zahn_premium[2]['val'] ?? '',
                         'V' => $b_with_zahn_premium[1]['date'] ?? '',
                         'W' => $b_with_zahn_premium[1]['val'] ?? '',
                         'X' => $b_with_zahn_premium[0]['date'] ?? '',
                         'Y' => $b_with_zahn_premium[0]['val'] ?? '',
-                        'Z' => $b['PremiumPlus'],
+                        'Z' => $b['PremiumPlus'] ?? '',
                         'AA' => $b_without_zahn_premplus[2]['date'] ?? '',
                         'AB' => $b_without_zahn_premplus[2]['val'] ?? '',
                         'AC' => $b_without_zahn_premplus[1]['date'] ?? '',
                         'AD' => $b_without_zahn_premplus[1]['val'] ?? '',
                         'AE' => $b_without_zahn_premplus[0]['date'] ?? '',
                         'AF' => $b_without_zahn_premplus[0]['val'] ?? '',
-                        'AG' => $b['PremiumPlus_zahn'],
+                        'AG' => $b['PremiumPlus_zahn'] ?? '',
                         'AH' => $b_with_zahn_premplus[2]['date'] ?? '',
                         'AI' => $b_with_zahn_premplus[2]['val'] ?? '',
                         'AJ' => $b_with_zahn_premplus[1]['date'] ?? '',
                         'AK' => $b_with_zahn_premplus[1]['val'] ?? '',
                         'AL' => $b_with_zahn_premplus[0]['date'] ?? '',
                         'AM' => $b_with_zahn_premplus[0]['val'] ?? '',
-                        'AN' => $a['Premium'],
+                        'AN' => $a['Premium'] ?? '',
                         'AO' => $a_without_zahn_premium[2]['date'] ?? '',
                         'AP' => $a_without_zahn_premium[2]['val'] ?? '',
                         'AQ' => $a_without_zahn_premium[1]['date'] ?? '',
                         'AR' => $a_without_zahn_premium[1]['val'] ?? '',
                         'AS' => $a_without_zahn_premium[0]['date'] ?? '',
                         'AT' => $a_without_zahn_premium[0]['val'] ?? '',
-                        'AU' => $a['Premium_zahn'],
+                        'AU' => $a['Premium_zahn'] ?? '',
                         'AV' => $a_with_zahn_premium[2]['date'] ?? '',
                         'AW' => $a_with_zahn_premium[2]['val'] ?? '',
                         'AX' => $a_with_zahn_premium[1]['date'] ?? '',
                         'AY' => $a_with_zahn_premium[1]['val'] ?? '',
                         'AZ' => $a_with_zahn_premium[0]['date'] ?? '',
                         'BA' => $a_with_zahn_premium[0]['val'] ?? '',
-                        'BB' => $a['PremiumPlus'],
+                        'BB' => $a['PremiumPlus'] ?? '',
                         'BC' => $a_without_zahn_premplus[2]['date'] ?? '',
                         'BD' => $a_without_zahn_premplus[2]['val'] ?? '',
                         'BE' => $a_without_zahn_premplus[1]['date'] ?? '',
                         'BF' => $a_without_zahn_premplus[1]['val'] ?? '',
                         'BG' => $a_without_zahn_premplus[0]['date'] ?? '',
                         'BH' => $a_without_zahn_premplus[0]['val'] ?? '',
-                        'BI' => $a['PremiumPlus_zahn'],
+                        'BI' => $a['PremiumPlus_zahn'] ?? '',
                         'BJ' => $a_with_zahn_premplus[2]['date'] ?? '',
                         'BK' => $a_with_zahn_premplus[2]['val'] ?? '',
                         'BL' => $a_with_zahn_premplus[1]['date'] ?? '',
