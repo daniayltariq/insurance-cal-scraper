@@ -313,7 +313,7 @@ include_once('simple_html_dom.php');
 
     foreach ($races as $key => $race){
 
-        if(trim($race) == 'Bretonischer Vorstehhund'){
+        if(trim($race) == 'Goralenhund'){
             $needle = true;
         }
 
