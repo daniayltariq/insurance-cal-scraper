@@ -313,7 +313,7 @@ include_once('simple_html_dom.php');
 
     foreach ($races as $key => $race){
 
-        if(trim($race) == 'Sauerländer Dachsbracke'){
+        if(trim($race) == 'Spanischer Mastiff'){
             $needle = true;
         }
 
